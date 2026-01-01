@@ -2,7 +2,9 @@ import fs from 'fs/promises';
 import path from 'path';
 import { PetState } from './types';
 
-const DB_PATH = path.join(process.cwd(), 'pet-state.json');
+const DB_PATH = process.env.VERCEL
+    ? path.join('/tmp', 'pet-state.json')
+    : path.join(process.cwd(), 'pet-state.json');
 
 const INITIAL_STATE: PetState = {
     name: 'GitGotchi',
