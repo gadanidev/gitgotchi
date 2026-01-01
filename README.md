@@ -59,3 +59,6 @@ To feed your pet, you must expose your local server to GitHub, or deploy the app
 Now push some code to your repo.
 - Clean code = Happy Pet 🟢
 - Bugs/Messy code = Sick Pet 🤢
+
+
+my pet in the house 🦖
