@@ -16,9 +16,15 @@ export async function fetchDiff(url: string): Promise<string> {
     try {
         // GitHub allows fetching diff by appending .diff to commit URL or using Accept header
         // Using Accept header is cleaner for API usage
-        const response = await fetch(url, {
-            headers: { 'Accept': 'application/vnd.github.v3.diff' }
-        });
+        const headers: Record<string, string> = {
+            'Accept': 'application/vnd.github.v3.diff'
+        };
+
+        if (process.env.GITHUB_ACCESS_TOKEN) {
+            headers['Authorization'] = `token ${process.env.GITHUB_ACCESS_TOKEN}`;
+        }
+
+        const response = await fetch(url, { headers });
         if (!response.ok) {
             console.error(`Failed to fetch diff: ${response.statusText}`);
             return '';
