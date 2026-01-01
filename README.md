@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GitGotchi 🦖
 
-## Getting Started
+An AI-powered digital pet that thrives on your code quality. It connects to your GitHub repository and "eats" your commits.
+Analyzed by **Gemini 1.5 Pro**.
 
-First, run the development server:
+## Features
+- **Code Digestion**: Analyzes code quality (cleanliness, complexity) of every push.
+- **Reactive Mood**: Gotchi gets sick if you push bugs, happy if you add tests.
+- **Real-time Interface**: See your specific pet evolve.
+- **Memory**: Remembers up to 20 past meals.
 
+## How to Install
+
+### 1. Requirements
+- Node.js 18+
+- A Google Gemini API Key (AI Studio)
+
+### 2. Setup
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/your-username/gitgotchi.git
+   cd gitgotchi
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure environment:
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local and add your GEMINI_API_KEY and a random GITHUB_WEBHOOK_SECRET
+   ```
+
+### 3. Running Locally
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Visit http://localhost:3000 to see your egg hatch!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. GitHub Webhook Integration
+To feed your pet, you must expose your local server to GitHub, or deploy the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Option A: Local (using ngrok)**
+1. Install ngrok and run: `ngrok http 3000`
+2. Copy the forwarding URL (e.g., `https://asdf-123.ngrok-free.app`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Option B: Deployment (Vercel)**
+1. Deploy this project to Vercel.
+2. Get the production URL.
 
-## Learn More
+**GitHub Configuration**:
+1. Go to your repository -> **Settings** -> **Webhooks** -> **Add webhook**.
+2. **Payload URL**: `YOUR_URL/api/webhooks`
+3. **Content type**: `application/json`
+4. **Secret**: Must match `GITHUB_WEBHOOK_SECRET` in your `.env.local`.
+5. **Which events?**: Select **Just the push event**.
+6. Click **Add webhook**.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Now push some code to your repo.
+- Clean code = Happy Pet 🟢
+- Bugs/Messy code = Sick Pet 🤢
